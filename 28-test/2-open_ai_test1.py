@@ -1,7 +1,6 @@
 """
-场景一：单图 —— 车辆里程表读数识别
+场景一：单轮图文问答（图片内容描述）
 """
-
 import os
 from openai import OpenAI
 
@@ -18,12 +17,12 @@ completion = client.chat.completions.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "你是一名汽车保险承保专家。这里有一张车辆里程表的图片。请从中提取关键信息，输出车辆当前总里程数（单位：公里），并说明仪表类型是机械式还是液晶式。"
+                    "text": "这是什么"
                 },
                 {
                     "type": "image_url",
                     "image_url": {
-                        "url": "https://vl-image.oss-cn-shanghai.aliyuncs.com/1-vehicle-odometer-reading.jpg"
+                        "url": "https://dashscope.oss-cn-beijing.aliyuncs.com/images/dog_and_girl.jpeg"
                     }
                 }
             ]
