@@ -5,5 +5,27 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "dashscope>=1.20.0",
     "openai>=3.5.0",
+    "openpyxl>=3.1.0",
+    "pandas>=2.2.0",
+    "pillow>=10.0.0",
+    "requests>=2.31.0",
 ]
+
+[dependency-groups]
+# pandas 不自带 py.typed，装上官方类型存根后类型检查器才能校验 DataFrame 相关调用
+dev = [
+    "pandas-stubs>=2.2.0",
+]
+
+[tool.basedpyright]
+# 显式指向项目虚拟环境：uv 托管的解释器目录在本机被判定为不受信任的装入点，
+# 自动发现会解析失败，导致所有第三方导入报 reportMissingImports
+venvPath = "."
+venv = ".venv"
+include = ["main.py", "28-test"]
+# pandas-stubs 自身含 Unknown（read_excel / to_excel 有数十个重载），
+# Series 取值也一律返回 Any，这两条规则对本项目的 pandas 调用只会产生噪音
+reportUnknownMemberType = false
+reportAny = false
