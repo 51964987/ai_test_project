@@ -1,0 +1,9 @@
+{
+  // 指定外部虚拟环境：venvPath 为虚拟环境所在的父目录，venv 为虚拟环境目录名
+  "venvPath": "D:/venvs",
+  "venv": "311_venvs",
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "standard",
+  // 28-test 依赖 openai / dashscope，未安装在当前 venv，暂不参与检查
+  "ignore": ["28-test/**"]
+}
