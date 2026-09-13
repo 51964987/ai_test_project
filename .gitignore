@@ -29,3 +29,9 @@ htmlcov/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# 脚本生成的图片产物
+*.png
+*.jpg
+
+models/
