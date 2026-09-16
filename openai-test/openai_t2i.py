@@ -1,26 +1,26 @@
+#!/usr/bin/env python
+# coding: utf-8
+
 import json
-import sys
+import os
 import urllib.request
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
-# 把项目根目录加入模块搜索路径，以便导入根目录下的公共模块
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-
 from openai import OpenAI
 
-from env_loader import load_dotenv, require_env
-
-# 加载 .env（自动按「入口脚本目录 -> 当前工作目录 -> 项目根目录」顺序查找）
-load_dotenv()
+# 从环境变量读取密钥；缺失时直接抛出明确错误信息
+AGICTO_API_KEY: str | None = os.getenv("AGICTO_API_KEY")
+if not AGICTO_API_KEY:
+    raise ValueError("请先设置环境变量 AGICTO_API_KEY")
 
 PROMPT = "湖边日落，唯美写实摄影，8k高清"
 # 万相（阿里百炼）尺寸格式用 * 分隔，不是 OpenAI 的 1280x720
 SIZE = "1280*720"
 
 client = OpenAI(
-    api_key=require_env("AGICTO_API_KEY"),
+    api_key=AGICTO_API_KEY,
     base_url="https://api.agicto.cn/v1",
 )
 
